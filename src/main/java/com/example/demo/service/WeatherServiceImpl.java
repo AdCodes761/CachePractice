@@ -21,10 +21,12 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public Weather getWeather(int pin) {
 		if(cache.checkData(pin)) {
-			cache.getData(pin);
+			System.out.println("got weather from cache");
+			return cache.getData(pin);
 		}
-              
-		Weather w= repo.findById(pin).get();
+              System.out.println("got weather from db");
+		Weather w= repo.findById(pin).orElse(null);
+		if(w != null)
 		cache.saveData(w);
 		return w;
 	}
@@ -33,7 +35,7 @@ public class WeatherServiceImpl implements WeatherService {
 	public String saveWeather(Weather w) {
 
 		repo.save(w);
-		cache.saveData(w);
+	
 		return "Weather added to DB and cache";
 	}
 

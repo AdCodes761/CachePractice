@@ -3,8 +3,10 @@ package com.example.demo.cache;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.entity.Weather;
+import org.springframework.stereotype.Component;
 
+import com.example.demo.entity.Weather;
+@Component
 public class Cache {
 	List<Weather> l = new ArrayList<>();
 
